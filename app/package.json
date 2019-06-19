@@ -1,0 +1,27 @@
+{
+  "name": "typescript-test-jest",
+  "version": "1.0.0",
+  "description": "proyecto que de validacion e2e",
+  "main": "jest.config.js",
+  "dependencies": {
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ronaldfox2015/app-typescript-test-jest.git"
+  },
+  "keywords": [
+    "API-E2E"
+  ],
+  "author": "Ronald Cutisaca Ramirez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronaldfox2015/app-typescript-test-jest/issues"
+  },
+  "homepage": "https://github.com/ronaldfox2015/app-typescript-test-jest#readme"
+}
