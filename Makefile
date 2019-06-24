@@ -42,11 +42,11 @@ build: ## construccion de la imagen: make build
 	docker build -f docker/node/Dockerfile -t $(IMAGE_DEPLOY) docker/node/;
 
 install: ## install de paquetes
-	make tast EXECUTE="i jest @types/jest ts-jest -D";
-	sudo chmod -R 777 app/*;
+	make tast EXECUTE="npm install";
+	sudo chmod -R 777 app/;
 
 tast: ## installar: make tast EXECUTE=install
-	docker run -it -v "$(PWD)/app:/app" -w "/app" $(IMAGE_DEPLOY) npm $(EXECUTE)
+	docker run -it -v "$(PWD)/app:/app" -w "/app" $(IMAGE_DEPLOY) $(EXECUTE)
 
 mysql: ## construir mysql
 	docker run -p 3306:3306 --name $(TAG_MYSQL) $(DOCKER_NETWORK) -v $(PWD)/docker/mysql/sql:/docker-entrypoint-initdb.d -e MYSQL_ROOT_PASSWORD=$(MYSQL_ROOT_PASSWORD) -e MYSQL_USER=$(MYSQL_USER) -e MYSQL_DATABASE=reservation -d mysql:5.5;
@@ -54,8 +54,8 @@ mysql: ## construir mysql
 start: ## inicializar proyecto: make login
 	docker run -it -p 3000:3000 --name $(PROJECT_NAME)  -v "$(PWD)/app:/app" -w "/app"  $(IMAGE_DEPLOY) yarn start
 
-migration: ## inicializar proyecto: make migration
-	docker run -it -v $(NETWORK) "$(PWD)/app:/app" -w "/app" $(IMAGE_DEPLOY) yarn migration
+test: ## inicializar proyecto: make migration
+	docker run -it -v "$(PWD)/app:/app" -w "/app" $(IMAGE_DEPLOY) npm test
 
 run-migration: ## inicializar proyecto: make migration
 	make mysql
